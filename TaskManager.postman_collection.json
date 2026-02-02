@@ -1,0 +1,82 @@
+{
+  "info": {
+    "name": "Task Manager API",
+    "_postman_id": "ab12cd34-ef56-7890-gh12-ijklmnopqrst",
+    "description": "Postman collection for Task Manager API with MongoDB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Task",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Learn Node\",\n  \"description\": \"Practice backend\"\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/tasks", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks"] }
+      }
+    },
+    {
+      "name": "Get All Tasks",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5000/api/tasks", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks"] }
+      }
+    },
+    {
+      "name": "Get Single Task",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5000/api/tasks/69804969ac0fde001c8f696c", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks","69804969ac0fde001c8f696c"] }
+      }
+    },
+    {
+      "name": "Update Task",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"completed\": true\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/tasks/69804969ac0fde001c8f696c", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks","69804969ac0fde001c8f696c"] }
+      }
+    },
+    {
+      "name": "Delete Task",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "http://localhost:5000/api/tasks/69804969ac0fde001c8f696c", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks","69804969ac0fde001c8f696c"] }
+      }
+    },
+    {
+      "name": "Filter Completed Tasks",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5000/api/tasks?completed=true", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks"], "query": [{ "key": "completed", "value": "true" }] }
+      }
+    },
+    {
+      "name": "Pagination Tasks",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5000/api/tasks?page=1&limit=5", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "5" }] }
+      }
+    },
+    {
+      "name": "Sort Tasks by Title",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5000/api/tasks?sort=title", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks"], "query": [{ "key": "sort", "value": "title" }] }
+      }
+    }
+  ]
+}
