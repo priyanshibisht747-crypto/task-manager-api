@@ -1,104 +1,69 @@
-# Task Manager API (MERN Backend Assignment)
+# Secure Task Manager API (MERN + JWT)
 
-## Description
-Backend REST API for Task Manager using Node.js, Express.js & MongoDB with CRUD operations, filtering, pagination, sorting, validation, and error handling.
-
----
-
-## Tech Stack
-Node.js, Express.js, MongoDB, Mongoose, Dotenv, Nodemon
+A Node.js & Express backend API for managing tasks with **JWT authentication**.  
+Users can **register, login, and manage their own tasks securely**.
 
 ---
 
-## Project Structure
-task-manager-project/
-models/
-Task.js
-routes/
-taskRoutes.js
-server.js
-package.json
-.gitignore
-README.md
-TaskManager.postman_collection.json
+## Features
 
+- User registration & login with hashed passwords (bcrypt)  
+- JWT authentication & protected task routes  
+- Authorization: users can only access their own tasks  
+- Task CRUD: Create, Read, Update, Delete  
+- Filter, pagination, and sorting for tasks  
+- Meaningful error messages for auth failures  
 
 ---
 
-## Setup Instructions
+## Setup
 
-1. Clone repository
-git clone <your-github-repo-url>
+1. **Clone the repository**
 
+```bash
+git clone https://github.com/<username>/task-manager-api.git
+cd task-manager-api
+Install dependencies
 
-2. Go to project folder
-cd task-manager-project
-
-
-3. Install dependencies
 npm install
+Configure environment variables (.env):
 
-
-4. Create `.env` file
-MONGO_URI=mongodb://localhost:27017/taskmanager
 PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+Start server
 
-
----
-
-## Run Project
-
-Development mode:
-npm run dev
-
-
-OR
-
-Normal run:
 node server.js
+Server runs at http://localhost:5000.
+
+API Endpoints
+Auth
+Method	Endpoint	Description
+POST	/api/auth/register	Register user
+POST	/api/auth/login	Login & get JWT
+Tasks (Protected)
+Method	Endpoint	Description
+POST	/api/tasks	Create task
+GET	/api/tasks	Get all tasks (user only)
+GET	/api/tasks/:id	Get single task
+PUT	/api/tasks/:id	Update task
+DELETE	/api/tasks/:id	Delete task
+All task routes require Authorization: Bearer <JWT_TOKEN>
+
+Authentication Flow
+User registers → password hashed and stored in DB
+
+User logs in → JWT token returned
+
+JWT used in Authorization header to access protected routes
+
+Middleware validates token → only allows task access if token is valid and belongs to the user
+
+Postman
+Import TaskManager.postman_collection.json
+
+Run Register → Login → Task routes
+
+Token automatically used for protected routes via {{jwt_token}} variable
 
 
-Server should show:
-MongoDB Connected
-Server running on port 5000
-
-
----
-
-## API Endpoints
-
-POST    /api/tasks  
-GET     /api/tasks  
-GET     /api/tasks/:id  
-PUT     /api/tasks/:id  
-DELETE  /api/tasks/:id  
-
----
-
-## Query Features
-
-Filter:
-/api/tasks?completed=true
-
-
-Pagination:
-/api/tasks?page=1&limit=10
-
-
-Sorting:
-/api/tasks?sortBy=createdAt
-/api/tasks?sortBy=title
-
-
----
-
-## Postman
-
-Import file:
-TaskManager.postman_collection.json
-
-
----
-
-## Author
-Priyanshi Bisht

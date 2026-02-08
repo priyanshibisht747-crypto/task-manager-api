@@ -1,25 +1,35 @@
 // Import mongoose
 const mongoose = require("mongoose");
 
-// Create Task Schema
-const taskSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    minlength: 3
-  },
-  description: {
-    type: String
-  },
-  completed: {
-    type: Boolean,
-    default: false
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+/*
+ TASK SCHEMA
+ - title: task title
+ - description: optional
+ - completed: status
+ - user: reference to logged-in user (OWNER)
+*/
 
-// Export Task model
+const taskSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    description: {
+      type: String
+    },
+    completed: {
+      type: Boolean,
+      default: false
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    }
+  },
+  { timestamps: true }
+);
+
 module.exports = mongoose.model("Task", taskSchema);
